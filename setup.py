@@ -2,7 +2,7 @@
 
 from setuptools import find_packages, setup
 
-with open("README.rst") as fh:
+with open("README.md") as fh:
     long_description = fh.read()
 
 requirements = ["pyperclip"]
@@ -14,6 +14,7 @@ setup(
     author_email="",
     description="Stateless password manager and generator.",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     license="MIT license",
     url="https://github.com/2O4/keyt",
     project_urls={
