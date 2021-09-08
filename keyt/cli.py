@@ -11,7 +11,7 @@ except ImportError:
     __version__ = "0.1"
 
 
-short_pass_length = 15
+short_pass_len = 15
 b64_altchars = b"42"
 b85_altchar_33 = "["
 b85_altchar_36 = "]"
@@ -22,18 +22,14 @@ def hash_data(data: str):
     data_sha_64 = hashlib.sha256(data.encode()).hexdigest()
 
     # shorten the data hash to 32 chars string
-    data_sha_32 = "".join(list(data_sha_64[i] for i in range(0, 64, 2)))
-
-    return data_sha_32
+    return "".join(list(data_sha_64[i] for i in range(0, 64, 2)))
 
 
 def base85_encode(data_hash: str):
     password = base64.b85encode(data_hash.encode()).decode()
-
     password = password.replace("!", b85_altchar_33)
     password = password.replace("$", b85_altchar_36)
     password = password.replace("`", b85_altchar_96)
-
     return password
 
 
@@ -51,12 +47,9 @@ def generate_password(
     return base85_encode(data_hash)
 
 
-def convert_short_simple(password: str, length: int = short_pass_length):
-    """Encode the password to a shorter and simpler version."""
-    simple_password = base64.b64encode(
-        password.encode(), altchars=b64_altchars
-    ).decode()
-    return simple_password[:length]
+def convert_short_simple(p: str, l: int = short_pass_len):
+    """Convert to the short and simple version."""
+    return base64.b64encode(p.encode(), altchars=b64_altchars).decode()[:l]
 
 
 def main():
