@@ -14,18 +14,11 @@ except ImportError:
 PASS_LEN = 40
 SHORT_PASS_LEN = 15
 B64_ALTCHARS = b"42"
-
-# CLI specific options
 TIMER = 20
-ESCAPE_DEFAULT = False
 
 
 def gen_password(
-    domain: str,
-    username: str,
-    master_password: str,
-    domain_counter: int = 0,
-    l: int = PASS_LEN,
+    domain, username, master_password, domain_counter=0, l=PASS_LEN
 ):
     str_domain_counter = "" if not domain_counter else str(domain_counter)
     data = domain.lower() + str_domain_counter + username + master_password
@@ -35,7 +28,7 @@ def gen_password(
     return b85_pass[:l]
 
 
-def convert_short_simple(p: str, l: int = SHORT_PASS_LEN):
+def convert_short_simple(p, l=SHORT_PASS_LEN):
     """Convert to the short and simple version."""
     return base64.b64encode(p.encode(), altchars=B64_ALTCHARS).decode()[:l]
 
