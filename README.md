@@ -53,10 +53,10 @@ $ keyt example.com admin admin
 Password copied to the clipboard for 20s.
 
 $ keyt example.com admin admin -o
-F=jSlI5}cDVK*=^H#uZwWI1JHVlp{2WMVQgG-hTo
+G%_+|V>o7EF=S*gVK+EsG-fwrVlp&gVK*~kIAJzq
 
 $ keyt example.com admin admin -o -s
-Rj1qU2xJNX1jRFZ
+RyVfK3xWPm83RUY
 ```
 
 ## License

@@ -8,48 +8,36 @@ from getpass import getpass
 try:
     from keyt import __version__
 except ImportError:
-    __version__ = "0.1"
+    __version__ = "0.2"
 
 
-short_pass_len = 15
-b64_altchars = b"42"
-b85_altchar_33 = "["
-b85_altchar_36 = "]"
-b85_altchar_96 = "."
+PASS_LEN = 40
+SHORT_PASS_LEN = 15
+B64_ALTCHARS = b"42"
+
+# CLI specific options
+TIMER = 20
+ESCAPE_DEFAULT = False
 
 
-def hash_data(data: str):
-    data_sha_64 = hashlib.sha256(data.encode()).hexdigest()
-
-    # shorten the data hash to 32 chars string
-    return "".join(list(data_sha_64[i] for i in range(0, 64, 2)))
-
-
-def base85_encode(data_hash: str):
-    password = base64.b85encode(data_hash.encode()).decode()
-    password = password.replace("!", b85_altchar_33)
-    password = password.replace("$", b85_altchar_36)
-    password = password.replace("`", b85_altchar_96)
-    return password
-
-
-def generate_password(
+def gen_password(
     domain: str,
     username: str,
     master_password: str,
-    domain_counter: int = 1,
+    domain_counter: int = 0,
+    l: int = PASS_LEN,
 ):
-    str_domain_counter = "" if domain_counter <= 1 else str(domain_counter)
-    data = username + domain.lower() + str_domain_counter + master_password
+    str_domain_counter = "" if not domain_counter else str(domain_counter)
+    data = domain.lower() + str_domain_counter + username + master_password
 
-    data_hash = hash_data(data)
+    data_hash = hashlib.sha256(data.encode()).hexdigest()
+    b85_pass = base64.b85encode(data_hash.encode()).decode()
+    return b85_pass[:l]
 
-    return base85_encode(data_hash)
 
-
-def convert_short_simple(p: str, l: int = short_pass_len):
+def convert_short_simple(p: str, l: int = SHORT_PASS_LEN):
     """Convert to the short and simple version."""
-    return base64.b64encode(p.encode(), altchars=b64_altchars).decode()[:l]
+    return base64.b64encode(p.encode(), altchars=B64_ALTCHARS).decode()[:l]
 
 
 def main():
@@ -84,8 +72,6 @@ def main():
         "password, increment to change password.",
         action="store",
         type=int,
-        nargs="?",
-        default=1,
     )
     parser.add_argument(
         "-s",
@@ -104,12 +90,12 @@ def main():
     parser.add_argument(
         "-t",
         "--timer",
-        help="Time before flushing the clipboard, default=20 (s), use 0 to "
-        "disable the timer.",
+        help=f"Time before flushing the clipboard, default={TIMER}s, use 0 "
+        "to disable the timer.",
         action="store",
         type=int,
         nargs="?",
-        default=20,
+        default=TIMER,
     )
 
     return dispatch(parser)
@@ -143,7 +129,7 @@ def dispatch(parser):
         except KeyboardInterrupt:
             return 1
 
-    password = generate_password(
+    password = gen_password(
         domain=domain,
         username=username,
         master_password=master_password,
