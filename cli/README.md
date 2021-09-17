@@ -1,0 +1,64 @@
+# keyt
+
+[![keyt-pypi](https://img.shields.io/pypi/v/keyt.svg)](https://pypi.python.org/pypi/keyt)
+
+keyt is a stateless password manager/generator.
+
+The intent of this program is to have a password manager and generator without storing any data anywhere in any form. No database, no storage, no encryption.
+
+## Install
+
+```shell
+pip install keyt
+```
+
+## Usage
+
+```
+usage: keyt [domain] [username] [master_password] [options]
+
+keyt stateless password manager and generator.
+
+positional arguments:
+  domain                Domain name/IP/service.
+  username              Username/Email/ID.
+  master_password       Master password used during the password generation.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --version
+  -c DOMAIN_COUNTER, --domain-counter DOMAIN_COUNTER
+                        An integer representing the number of times you
+                        changed your password, increment to change password.
+                        Default=0.
+  -s, --short-simple    Short and simple password, 15 chars variant instead of
+                        the 40 default, and without special characters.
+  -o, --output          Output the password, by default the password is added
+                        to the clipboard.
+  -t [TIMER], --timer [TIMER]
+                        Time before flushing the clipboard, default=20s, use 0
+                        or nothing to disable the timer.
+```
+
+## Examples
+
+```
+$ keyt
+domain: example.com
+username: admin
+master password:
+Password copied to the clipboard for 20s.
+
+$ keyt example.com admin admin
+Password copied to the clipboard for 20s.
+
+$ keyt example.com admin admin -o
+G%_+|V>o7EF=S*gVK+EsG-fwrVlp&gVK*~kIAJzq
+
+$ keyt example.com admin admin -o -s
+RyVfK3xWPm83RUY
+```
+
+## License
+
+keyt is licensed under MIT.

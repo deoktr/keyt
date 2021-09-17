@@ -5,11 +5,7 @@ import hashlib
 import time
 from getpass import getpass
 
-try:
-    from keyt import __version__
-except ImportError:
-    __version__ = "0.2"
-
+__version__ = "0.2.1"
 
 PASS_LEN = 40  # max = 80
 SHORT_PASS_LEN = 15
@@ -20,14 +16,12 @@ TIMER = 20
 def gen_password(d, u, m, c=0, l=PASS_LEN):
     c = "" if not c else str(abs(c))
     data = d.lower() + c + u + m
-
     data_hash = hashlib.sha256(data.encode()).hexdigest()
     b85_pass = base64.b85encode(data_hash.encode()).decode()
     return b85_pass[:l]
 
 
 def convert_short_simple(p, l=SHORT_PASS_LEN):
-    """Convert to the short and simple version."""
     return base64.b64encode(p.encode(), altchars=B64_ALTCHARS).decode()[:l]
 
 
@@ -88,7 +82,6 @@ def main():
         nargs="?",
         default=TIMER,
     )
-
     return dispatch(parser)
 
 
@@ -138,7 +131,7 @@ def dispatch(parser):
     pyperclip.copy(password)
     timer = args.timer
     if timer and timer > 0:
-        print("Password copied to the clipboard for {}s.".format(timer))
+        print(f"Password copied to the clipboard for {timer}s.")
         try:
             time.sleep(timer)
         except KeyboardInterrupt:
