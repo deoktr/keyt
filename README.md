@@ -17,7 +17,7 @@ pip install keyt
 ```
 usage: keyt [domain] [username] [master_password] [options]
 
-keyt stateless password manager/generator.
+keyt stateless password manager and generator.
 
 positional arguments:
   domain                Domain name/IP/service.
@@ -27,17 +27,17 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --version
-  -c [DOMAIN_COUNTER], --domain-counter [DOMAIN_COUNTER]
+  -c DOMAIN_COUNTER, --domain-counter DOMAIN_COUNTER
                         An integer representing the number of times you
                         changed your password, increment to change password.
-  -s, --short-simple    Short and simple password, generate a 15 char password
-                        variant instead of the 40 default, and without special
-                        characters.
+                        Default=0.
+  -s, --short-simple    Short and simple password, 15 chars variant instead of
+                        the 40 default, and without special characters.
   -o, --output          Output the password, by default the password is added
                         to the clipboard.
   -t [TIMER], --timer [TIMER]
-                        Time before flushing the clipboard, default=20 (s),
-                        use 0 to disable the timer.
+                        Time before flushing the clipboard, default=20s, use 0
+                        or nothing to disable the timer.
 ```
 
 ## Examples
