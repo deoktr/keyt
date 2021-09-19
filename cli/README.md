@@ -2,11 +2,13 @@
 
 [![keyt-pypi](https://img.shields.io/pypi/v/keyt.svg)](https://pypi.python.org/pypi/keyt)
 
-keyt is a stateless password manager/generator.
+keyt is a stateless password manager and generator.
 
-The intent of this program is to have a password manager and generator without storing any data anywhere in any form. No database, no storage, no encryption.
+**Derive don't store.**
 
-## Install
+The intent of this program is to have a password manager and generator without storing any data anywhere in any form. The password is derived from a master password.
+
+## Install CLI
 
 ```shell
 pip install keyt
@@ -14,7 +16,7 @@ pip install keyt
 
 ## Usage
 
-```
+```txt
 usage: keyt [domain] [username] [master_password] [options]
 
 keyt stateless password manager and generator.
@@ -27,22 +29,22 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --version
-  -c DOMAIN_COUNTER, --domain-counter DOMAIN_COUNTER
-                        An integer representing the number of times you
-                        changed your password, increment to change password.
-                        Default=0.
-  -s, --short-simple    Short and simple password, 15 chars variant instead of
-                        the 40 default, and without special characters.
-  -o, --output          Output the password, by default the password is added
+  -c COUNTER, --counter COUNTER
+                        An integer that can be incremented to change our the
+                        password. default=0.
+  -f FORMAT, --format FORMAT
+                        Password format can be: 'max', 'high', 'mid', 'pin' or
+                        'pin6'. default=max.
+  -o, --output          Output the password, by default the password is copied
                         to the clipboard.
   -t [TIMER], --timer [TIMER]
-                        Time before flushing the clipboard, default=20s, use 0
+                        Time before flushing the clipboard. default=20s, use 0
                         or nothing to disable the timer.
 ```
 
 ## Examples
 
-```
+```shell
 $ keyt
 domain: example.com
 username: admin
@@ -53,10 +55,19 @@ $ keyt example.com admin admin
 Password copied to the clipboard for 20s.
 
 $ keyt example.com admin admin -o
-G%_+|V>o7EF=S*gVK+EsG-fwrVlp&gVK*~kIAJzq
+Fg0XjW@a=vWi@3qGBjo|Vlic7Wo9`zVKp!{Vl_Bp
 
-$ keyt example.com admin admin -o -s
-RyVfK3xWPm83RUY
+$ keyt example.com admin admin -o -f mid
+5w8Hv23ZUvJCRt2t
+
+$ keyt example.com admin admin -o -f pin
+3070
+```
+
+```python
+>>> from keyt import gen_password
+>>> gen_password(d="example.com", u="admin", m="admin")
+'Fg0XjW@a=vWi@3qGBjo|Vlic7Wo9`zVKp!{Vl_Bp'
 ```
 
 ## License

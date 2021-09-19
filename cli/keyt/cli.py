@@ -1,28 +1,42 @@
 #!/usr/bin/env python3
 import argparse
-import base64
-import hashlib
 import time
+from base64 import b85encode
 from getpass import getpass
+from hashlib import blake2b, scrypt
 
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 
-PASS_LEN = 40  # max = 80
-SHORT_PASS_LEN = 15
-B64_ALTCHARS = b"42"
+SCRYPT_N = 16384  # 2^14
+SCRYPT_R = 8
+SCRYPT_P = 2
 TIMER = 20
 
 
-def gen_password(d, u, m, c=0, l=PASS_LEN):
-    c = "" if not c else str(abs(c))
-    data = d.lower() + c + u + m
-    data_hash = hashlib.sha256(data.encode()).hexdigest()
-    b85_pass = base64.b85encode(data_hash.encode()).decode()
-    return b85_pass[:l]
+def gen_password(d, u, m, c=0, f="max"):
+    salt = u.encode()
+    key = scrypt(m.encode(), salt=salt, n=SCRYPT_N, r=SCRYPT_R, p=SCRYPT_P)
 
+    c = str(c) if c > 0 else ""
+    data = (d.lower() + c + u).encode()
+    seed = blake2b(data, key=key).hexdigest().encode()
 
-def convert_short_simple(p, l=SHORT_PASS_LEN):
-    return base64.b64encode(p.encode(), altchars=B64_ALTCHARS).decode()[:l]
+    if f == "max":
+        return b85encode(seed).decode()[:40]
+    elif f == "high":
+        return b85encode(seed).decode()[:16]
+    elif f == "mid":
+        try:
+            from base58 import b58encode
+        except ImportError:
+            raise Exception("Install `base58` or use another format.")
+        return b58encode(seed).decode()[:16]
+    elif f == "pin":
+        return str(int(seed, 16))[:4]
+    elif f == "pin6":
+        return str(int(seed, 16))[:6]
+    else:
+        raise Exception(f"invalid format '{f}'.")
 
 
 def main():
@@ -52,30 +66,32 @@ def main():
     )
     parser.add_argument(
         "-c",
-        "--domain-counter",
-        help="An integer representing the number of times you changed your "
-        f"password, increment to change password. Default=0.",
+        "--counter",
+        help="An integer that can be incremented to change our the password. "
+        "default=0.",
         action="store",
         type=int,
+        default=0,
     )
     parser.add_argument(
-        "-s",
-        "--short-simple",
-        help=f"Short and simple password, {SHORT_PASS_LEN} chars variant "
-        f"instead of the {PASS_LEN} default, and without special characters.",
-        action="store_true",
+        "-f",
+        "--format",
+        help="Password format can be: 'max', 'high', 'mid', 'pin' or 'pin6'. "
+        "default=max.",
+        action="store",
+        default="max",
     )
     parser.add_argument(
         "-o",
         "--output",
-        help="Output the password, by default the password is added to the "
+        help="Output the password, by default the password is copied to the "
         "clipboard.",
         action="store_true",
     )
     parser.add_argument(
         "-t",
         "--timer",
-        help=f"Time before flushing the clipboard, default={TIMER}s, use 0 "
+        help=f"Time before flushing the clipboard. default={TIMER}s, use 0 "
         "or nothing to disable the timer.",
         action="store",
         type=int,
@@ -113,10 +129,11 @@ def dispatch(parser):
         except KeyboardInterrupt:
             return 1
 
-    password = gen_password(d=d, u=u, m=m, c=args.domain_counter)
-
-    if args.short_simple:
-        password = convert_short_simple(password)
+    try:
+        password = gen_password(d=d, u=u, m=m, c=args.counter, f=args.format)
+    except Exception as e:
+        print(e)
+        return 1
 
     if args.output:
         print(password)
@@ -137,10 +154,10 @@ def dispatch(parser):
         except KeyboardInterrupt:
             pass
         pyperclip.copy("")  # remove the content of the clipboard
+        return 0
     else:
         print("Password copied to the clipboard.")
-
-    return 0
+        return 0
 
 
 if __name__ == "__main__":

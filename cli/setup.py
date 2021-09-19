@@ -5,11 +5,11 @@ from setuptools import find_packages, setup
 with open("README.md") as fh:
     long_description = fh.read()
 
-requirements = ["pyperclip"]
+requirements = ["pyperclip", "base58"]
 
 setup(
     name="keyt",
-    version="0.2.1",
+    version="0.3.0",
     author="keyt",
     author_email="",
     description="Stateless password manager and generator.",
