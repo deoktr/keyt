@@ -87,7 +87,7 @@ optional arguments:
 
 ## Examples
 
-```shell
+```text
 $ keyt
 domain: example.com
 username: admin
