@@ -5,17 +5,12 @@ from base64 import b85encode
 from getpass import getpass
 from hashlib import blake2b, scrypt
 
-__version__ = "0.3.0"
-
-SCRYPT_N = 16384  # 2^14
-SCRYPT_R = 8
-SCRYPT_P = 2
-TIMER = 20
+__version__ = "0.3.1"
 
 
 def gen_password(d, u, m, c=0, f="max"):
     salt = u.encode()
-    key = scrypt(m.encode(), salt=salt, n=SCRYPT_N, r=SCRYPT_R, p=SCRYPT_P)
+    key = scrypt(m.encode(), salt=salt, n=16384, r=8, p=2)
 
     c = str(c) if c > 0 else ""
     data = (d.lower() + c + u).encode()
@@ -49,19 +44,16 @@ def main():
     parser.add_argument(
         "domain",
         help="Domain name/IP/service.",
-        type=str,
         nargs="?",
     )
     parser.add_argument(
         "username",
         help="Username/Email/ID.",
-        type=str,
         nargs="?",
     )
     parser.add_argument(
         "master_password",
         help="Master password used during the password generation.",
-        type=str,
         nargs="?",
     )
     parser.add_argument(
@@ -69,7 +61,6 @@ def main():
         "--counter",
         help="An integer that can be incremented to change our the password. "
         "default=0.",
-        action="store",
         type=int,
         default=0,
     )
@@ -78,25 +69,21 @@ def main():
         "--format",
         help="Password format can be: 'max', 'high', 'mid', 'pin' or 'pin6'. "
         "default=max.",
-        action="store",
         default="max",
     )
     parser.add_argument(
         "-o",
         "--output",
-        help="Output the password, by default the password is copied to the "
-        "clipboard.",
+        help="Output the password, by default copy it to the clipboard.",
         action="store_true",
     )
     parser.add_argument(
         "-t",
         "--timer",
-        help=f"Time before flushing the clipboard. default={TIMER}s, use 0 "
-        "or nothing to disable the timer.",
-        action="store",
+        help="Time before flushing the clipboard. default=20s.",
         type=int,
         nargs="?",
-        default=TIMER,
+        default=20,
     )
     return dispatch(parser)
 

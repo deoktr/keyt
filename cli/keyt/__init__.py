@@ -1,1 +1,1 @@
-from keyt.cli import gen_password
+from keyt.cli import gen_password  # noqa

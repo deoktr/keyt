@@ -36,13 +36,13 @@ The password is generated from 5 inputs.
 
 ### Password formats
 
-| Format | Length | Char set | Base |
-| --- | --- | --- | --- |
-| `max` | 40 | ``[a-zA-Z0-9!#$%&()*+-;<=>?@^_`{\|}~]`` | **base85** RFC 1924 |
-| `high` | 16 | ``[a-zA-Z0-9!#$%&()*+-;<=>?@^_`{\|}~]`` | **base85** RFC 1924 |
-| `mid` | 16 | `[a-zA-Z0-9]` except `[0OIl]` | **base58** |
-| `pin` | 4 | `[0-9]` | **base10** |
-| `pin6` | 6 | `[0-9]` | **base10** |
+| Format | Length | Char set                                | Base                |
+| ------ | ------ | --------------------------------------- | ------------------- |
+| `max`  | 40     | ``[a-zA-Z0-9!#$%&()*+-;<=>?@^_`{\|}~]`` | **base85** RFC 1924 |
+| `high` | 16     | ``[a-zA-Z0-9!#$%&()*+-;<=>?@^_`{\|}~]`` | **base85** RFC 1924 |
+| `mid`  | 16     | `[a-zA-Z0-9]` except `[0OIl]`           | **base58**          |
+| `pin`  | 4      | `[0-9]`                                 | **base10**          |
+| `pin6` | 6      | `[0-9]`                                 | **base10**          |
 
 Base85 is used has encoding because it adds special characters. The RFC 1924 is a
 revised version of Ascii85 but this version excludes the characters `"',./:[\] `.
@@ -78,11 +78,10 @@ optional arguments:
   -f FORMAT, --format FORMAT
                         Password format can be: 'max', 'high', 'mid', 'pin' or
                         'pin6'. default=max.
-  -o, --output          Output the password, by default the password is copied
-                        to the clipboard.
+  -o, --output          Output the password, by default copy it to the
+                        clipboard.
   -t [TIMER], --timer [TIMER]
-                        Time before flushing the clipboard. default=20s, use 0
-                        or nothing to disable the timer.
+                        Time before flushing the clipboard. default=20s.
 ```
 
 ## Examples
