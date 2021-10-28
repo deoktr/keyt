@@ -35,16 +35,15 @@ optional arguments:
   -f FORMAT, --format FORMAT
                         Password format can be: 'max', 'high', 'mid', 'pin' or
                         'pin6'. default=max.
-  -o, --output          Output the password, by default the password is copied
-                        to the clipboard.
+  -o, --output          Output the password, by default copy it to the
+                        clipboard.
   -t [TIMER], --timer [TIMER]
-                        Time before flushing the clipboard. default=20s, use 0
-                        or nothing to disable the timer.
+                        Time before flushing the clipboard. default=20s.
 ```
 
 ## Examples
 
-```shell
+```text
 $ keyt
 domain: example.com
 username: admin

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Keyt CLI, a stateless password manager and generator."""
 import argparse
 import time
 from base64 import b85encode
@@ -9,6 +10,7 @@ __version__ = "0.3.1"
 
 
 def gen_password(d, u, m, c=0, f="max"):
+    """Keyt password generation algorithm."""
     salt = u.encode()
     key = scrypt(m.encode(), salt=salt, n=16384, r=8, p=2)
 
@@ -35,6 +37,7 @@ def gen_password(d, u, m, c=0, f="max"):
 
 
 def main():
+    """CLI arguments parser init."""
     parser = argparse.ArgumentParser(
         prog="keyt",
         usage="keyt [domain] [username] [master_password] [options]",
@@ -89,6 +92,7 @@ def main():
 
 
 def dispatch(parser):
+    """Dispatch from the CLI parser."""
     args = parser.parse_args()
 
     if args.version:
