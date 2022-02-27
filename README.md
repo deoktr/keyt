@@ -107,10 +107,9 @@ The password is generated from 5 inputs.
 | `pin`  | 4      | `[0-9]`                                 | **base10**          |
 | `pin6` | 6      | `[0-9]`                                 | **base10**          |
 
-Base85 is used has encoding because it adds special characters. The RFC 1924 is a
-revised version of Ascii85 but this version excludes the characters `"',./:[\] `.
+Base85 is used has encoding because it adds special characters. The RFC 1924 is a revised version of Ascii85 but this version excludes the characters `"',./:[\] `.
 
-Base58 is used has encoding because it only contains non ambiguous characters when printed, expluced characters: `0IOl`.
+Base58 is used has encoding because it only contains non ambiguous characters when printed, excluded characters: `0IOl`. It was originaly created by Satoshi Nakamoto to encode bitcoin addresses in an easly readable way.
 
 ## License
 
