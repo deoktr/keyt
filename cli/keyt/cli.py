@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Keyt CLI, a stateless password manager and generator."""
 import argparse
+import sys
 import time
 from base64 import b85encode
 from enum import Enum, auto
 from getpass import getpass
 from hashlib import blake2b, scrypt
-from typing import Union
 
 try:
     from base58 import b58encode
@@ -23,21 +23,28 @@ except ImportError:
     PYPERCLIP_INSTALLED = False
 
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 
 class F(Enum):
     """Formats available."""
 
-    max = auto()
-    high = auto()
-    mid = auto()
-    pin = auto()
-    pin6 = auto()
+    MAX = auto()
+    HIGH = auto()
+    MID = auto()
+    PIN = auto()
+    PIN6 = auto()
 
 
-def gen_password(d, u, m, c=0, f=F.max):
+def gen_password(d, u, m, c=0, f="max"):
     """Keyt password generation algorithm."""
+    f = f.upper()
+
+    if f not in list(F.__members__.keys()):
+        raise ValueError(f"Invalid format '{f}'.")
+
+    f = F[f]
+
     salt = u.encode()
     key = scrypt(m.encode(), salt=salt, n=16384, r=8, p=2)
 
@@ -45,24 +52,21 @@ def gen_password(d, u, m, c=0, f=F.max):
     data = (d.lower() + c + u).encode()
     seed = blake2b(data, key=key).hexdigest().encode()
 
-    if f == F.max:
+    if f == F.MAX:
         return b85encode(seed).decode()[:40]
-    elif f == F.high:
+    elif f == F.HIGH:
         return b85encode(seed).decode()[:16]
-    elif f == F.mid:
-        if BASE58_INSTALLED:
-            return b58encode(seed).decode()[:16]
-        else:
+    elif f == F.MID:
+        if not BASE58_INSTALLED:
             raise Exception("Install `base58` or use another format.")
-    elif f == F.pin:
+        return b58encode(seed).decode()[:16]
+    elif f == F.PIN:
         return int(str(int(seed, 16))[:4])
-    elif f == F.pin6:
+    elif f == F.PIN6:
         return int(str(int(seed, 16))[:6])
-    else:
-        raise Exception(f"invalid format '{f}'.")
 
 
-def main():
+def parse_args(args=None):
     """CLI arguments parser init."""
     parser = argparse.ArgumentParser(
         prog="keyt",
@@ -114,12 +118,15 @@ def main():
         nargs="?",
         default=20,
     )
-    return dispatch(parser)
+
+    if args is None:
+        args = sys.argv[1:]
+
+    return parser.parse_args(args)
 
 
-def dispatch(parser):
+def dispatch(args):
     """Dispatch from the CLI parser."""
-    args = parser.parse_args()
 
     if args.version:
         print(f"keyt version {__version__}")
@@ -146,10 +153,8 @@ def dispatch(parser):
         except KeyboardInterrupt:
             return 1
 
-    f = F[args.format]
-
     try:
-        password = gen_password(d=d, u=u, m=m, c=args.counter, f=f)
+        password = gen_password(d=d, u=u, m=m, c=args.counter, f=args.format)
     except Exception as e:
         print(e)
         return 1
@@ -177,7 +182,11 @@ def dispatch(parser):
         return 0
 
 
-if __name__ == "__main__":
-    import sys
+def main():
+    """Main function for the cli."""
+    parsed_args = parse_args()
+    return dispatch(parsed_args)
 
-    sys.exit(main())
+
+if __name__ == "__main__":
+    main()
