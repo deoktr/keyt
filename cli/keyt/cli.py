@@ -23,7 +23,7 @@ except ImportError:
     PYPERCLIP_INSTALLED = False
 
 
-__version__ = "0.4.1"
+__version__ = "0.4.2"
 
 
 class F(Enum):
@@ -40,7 +40,7 @@ def gen_password(d, u, m, c=0, f="max"):
     """Keyt password generation algorithm."""
     f = f.upper()
 
-    if f not in list(F.__members__.keys()):
+    if f not in list(F.__members__):
         raise ValueError(f"Invalid format '{f}'.")
 
     f = F[f]
@@ -53,17 +53,19 @@ def gen_password(d, u, m, c=0, f="max"):
     seed = blake2b(data, key=key).hexdigest().encode()
 
     if f == F.MAX:
-        return b85encode(seed).decode()[:40]
+        password = b85encode(seed).decode()[:40]
     elif f == F.HIGH:
-        return b85encode(seed).decode()[:16]
+        password = b85encode(seed).decode()[:16]
     elif f == F.MID:
         if not BASE58_INSTALLED:
             raise Exception("Install `base58` or use another format.")
-        return b58encode(seed).decode()[:16]
+        password = b58encode(seed).decode()[:16]
     elif f == F.PIN:
-        return int(str(int(seed, 16))[:4])
+        password = int(str(int(seed, 16))[:4])
     elif f == F.PIN6:
-        return int(str(int(seed, 16))[:6])
+        password = int(str(int(seed, 16))[:6])
+
+    return password
 
 
 def parse_args(args=None):
