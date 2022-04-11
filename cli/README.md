@@ -8,6 +8,8 @@ keyt is a stateless password manager and generator.
 
 The intent of this program is to have a password manager and generator without storing any data anywhere in any form. The password is derived from a master password.
 
+⚠️ Every passwords are derived from your master password, if you loose it you will lose access to all your account, be carreful.
+
 ## Install CLI
 
 ```shell
