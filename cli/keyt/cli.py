@@ -23,7 +23,7 @@ except ImportError:
     PYPERCLIP_INSTALLED = False
 
 
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 
 
 class F(Enum):
@@ -132,63 +132,55 @@ def dispatch(args):
 
     if args.version:
         print(f"keyt version {__version__}")
-        return 0
+        return
 
     d = args.domain
     if d is None:
-        try:
-            d = str(input("domain: "))
-        except KeyboardInterrupt:
-            return 1
+        d = str(input("domain: "))
 
     u = args.username
     if u is None:
-        try:
-            u = str(input("username: "))
-        except KeyboardInterrupt:
-            return 1
+        u = str(input("username: "))
 
     m = args.master_password
     if m is None:
-        try:
-            m = getpass("master password: ")
-        except KeyboardInterrupt:
-            return 1
+        m = getpass("master password: ")
 
-    try:
-        password = gen_password(d=d, u=u, m=m, c=args.counter, f=args.format)
-    except Exception as e:
-        print(e)
-        return 1
+    password = gen_password(d=d, u=u, m=m, c=args.counter, f=args.format)
 
     if args.output:
         print(password)
-        return 0
+        return
 
     if not PYPERCLIP_INSTALLED:
-        print("`pyperclip` is needed.\nYou can also use the `-o` flag.")
-        return 1
+        raise Exception(
+            "`pyperclip` is needed.\nYou can also use the `-o` flag."
+        )
 
     pyperclip.copy(password)
     timer = args.timer
     if timer and timer > 0:
         print(f"Password copied to the clipboard for {timer}s.")
-        try:
-            time.sleep(timer)
-        except KeyboardInterrupt:
-            pass
+        time.sleep(timer)
         pyperclip.copy("")  # remove the content of the clipboard
-        return 0
     else:
         print("Password copied to the clipboard.")
-        return 0
 
 
-def main():
+def cli():
     """Main function for the cli."""
     parsed_args = parse_args()
-    return dispatch(parsed_args)
+
+    try:
+        dispatch(parsed_args)
+        sys.exit(0)
+    except KeyboardInterrupt:
+        print()
+        sys.exit(0)
+    except Exception as e:
+        print(e)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
-    main()
+    cli()

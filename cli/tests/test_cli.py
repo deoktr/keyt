@@ -24,7 +24,7 @@ def test_parse_args_counter():
 
 def test_parse_args_output():
     parser = parse_args(["example.com", "admin", "password", "-o"])
-    assert parser.output == True
+    assert parser.output is True
 
 
 def test_parse_args_timer():
@@ -34,4 +34,4 @@ def test_parse_args_timer():
 
 def test_parse_args_version():
     parser = parse_args(["--version"])
-    assert parser.version == True
+    assert parser.version is True

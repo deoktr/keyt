@@ -1,5 +1,5 @@
 """Keyt CLI."""
-from keyt.cli import main
+from keyt.cli import cli
 
 if __name__ == "__main__":
-    main()
+    cli()

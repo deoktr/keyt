@@ -23,7 +23,7 @@ def test_gen_password_high():
     assert password == "Fg0XjW@a=vWi@3qG"
 
 
-def test_gen_password_high():
+def test_gen_password_mid():
     password = gen_password(d="example.com", u="admin", m="admin", f="mid")
     assert isinstance(password, str)
     assert len(password) == 16
