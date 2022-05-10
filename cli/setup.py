@@ -38,7 +38,7 @@ setup(
     python_requires=">=3.5",
     entry_points={
         "console_scripts": [
-            "keyt=keyt.cli:main",
+            "keyt=keyt.cli:cli",
         ],
     },
     install_requires=requirements,
