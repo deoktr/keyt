@@ -71,6 +71,18 @@ $ keyt example.com admin admin -o -f pin
 'Fg0XjW@a=vWi@3qGBjo|Vlic7Wo9`zVKp!{Vl_Bp'
 ```
 
+## Troubleshooting
+
+If you get an error on pyperclip it's probably because you need to install additionnal packages.
+
+For example on Ubuntu:
+
+```bash
+sudo apt-get install xclip
+```
+
+More infos on pyperclip description: [pypi pyperclip](https://pypi.org/project/pyperclip/).
+
 ## License
 
 keyt is licensed under MIT.

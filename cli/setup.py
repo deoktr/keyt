@@ -10,7 +10,7 @@ requirements = ["pyperclip", "base58"]
 
 setup(
     name="keyt",
-    version="0.4.3",
+    version="1.0.0",
     author="keyt",
     author_email="",
     description="Stateless password manager and generator.",
@@ -22,7 +22,7 @@ setup(
         "Bug Tracker": "https://github.com/2O4/keyt/issues",
     },
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: End Users/Desktop",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
