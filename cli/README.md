@@ -32,8 +32,8 @@ optional arguments:
   -h, --help            show this help message and exit
   --version
   -c COUNTER, --counter COUNTER
-                        An integer that can be incremented to change our the
-                        password. default=0.
+                        An integer that can be incremented to get a new password
+                        for the same account. default=0.
   -f FORMAT, --format FORMAT
                         Password format can be: 'max', 'high', 'mid', 'pin' or
                         'pin6'. default=max.

@@ -34,8 +34,8 @@ optional arguments:
   -h, --help            show this help message and exit
   --version
   -c COUNTER, --counter COUNTER
-                        An integer that can be incremented to change our the
-                        password. default=0.
+                        An integer that can be incremented to get a new password
+                        for the same account. default=0.
   -f FORMAT, --format FORMAT
                         Password format can be: 'max', 'high', 'mid', 'pin' or
                         'pin6'. default=max.
@@ -82,8 +82,12 @@ The password is generated from 5 inputs.
 * `domain` (d): domain, ip, service or any other string representing a password protected thing.
 * `username` (u): domains's username.
 * `master_password` (m): master password.
-* `counter` (c) (*default*=0): an integer that can be incremented to change the password.
+* `counter` (c) (*default*=0): an integer that can be incremented to get a new password for the same account.
 * `format` (f) (*default*=max): the password's format, can be: `max`, `high`, `mid`, `pin`, `pin6`.
+
+For more informations on the format go the the `Password formats` section.
+
+The counter input is used to get a new password for the same account, this can be usefull to change the password without having to change your master password.
 
 ### Algorithm
 

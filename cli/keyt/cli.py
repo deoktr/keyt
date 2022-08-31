@@ -94,8 +94,8 @@ def parse_args(args=None):
     parser.add_argument(
         "-c",
         "--counter",
-        help="An integer that can be incremented to change our the password. "
-        "default=0.",
+        help="An integer that can be incremented to get a new password for the "
+        "same account. default=0.",
         type=int,
         default=0,
     )
