@@ -7,7 +7,7 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,6 +21,6 @@ jobs:
         pip install pytest
         pip install pytest-cov
         pip install base58
-    - name: Analysing the code with black
+    - name: Test Python code and coverage
       run: pytest --cov=keyt
       working-directory: cli
