@@ -16,6 +16,14 @@ The intent of this program is to have a password manager and generator without s
 pip install keyt
 ```
 
+or from source
+
+```shell
+git clone https://github.com/2O4/keyt
+cd keyt/cli
+pip install .
+```
+
 ## Usage
 
 ```txt

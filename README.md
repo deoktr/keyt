@@ -16,6 +16,14 @@ The intent of this program is to have a password manager and generator without s
 pip install keyt
 ```
 
+or from source
+
+```shell
+git clone https://github.com/2O4/keyt
+cd keyt/cli
+pip install .
+```
+
 You can also use the CLI has a single file, just download [cli/keyt/cli.py](./cli/keyt/cli.py). Note that you will need to install `pyperclip` and `base58` to get full functionality.
 
 ## Usage
