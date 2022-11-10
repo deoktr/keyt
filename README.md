@@ -30,12 +30,14 @@ positional arguments:
   username              Username/Email/ID.
   master_password       Master password used during the password generation.
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  --version
+  -V, --version
+  --confirm             Ask to confirm master password, usefull when
+                        generating a new password.
   -c COUNTER, --counter COUNTER
-                        An integer that can be incremented to get a new password
-                        for the same account. default=0.
+                        An integer that can be incremented to get a new
+                        password for the same account. default=0.
   -f FORMAT, --format FORMAT
                         Password format can be: 'max', 'high', 'mid', 'pin' or
                         'pin6'. default=max.
@@ -52,6 +54,13 @@ $ keyt
 domain: example.com
 username: admin
 master password:
+Password copied to the clipboard for 20s.
+
+$ keyt --confirm
+domain: example.com
+username: admin
+master password:
+master password (confirm):
 Password copied to the clipboard for 20s.
 
 $ keyt example.com admin admin

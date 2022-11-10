@@ -10,7 +10,7 @@ requirements = ["pyperclip", "base58"]
 
 setup(
     name="keyt",
-    version="1.0.0",
+    version="1.1.0",
     author="keyt",
     author_email="",
     description="Stateless password manager and generator.",
@@ -32,6 +32,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Security",
     ],
     packages=find_packages(include=["keyt", "keyt.*"]),

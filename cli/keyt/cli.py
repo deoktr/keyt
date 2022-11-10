@@ -23,7 +23,7 @@ except ImportError:
     PYPERCLIP_INSTALLED = False
 
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 
 class F(Enum):
@@ -107,6 +107,12 @@ def parse_args(args=None):
         default="max",
     )
     parser.add_argument(
+        "--confirm",
+        help="Ask to confirm master password, usefull when generating a new "
+        "password.",
+        action="store_true",
+    )
+    parser.add_argument(
         "-o",
         "--output",
         help="Output the password, by default copy it to the clipboard.",
@@ -144,7 +150,15 @@ def dispatch(args):
 
     m = args.master_password
     if m is None:
-        m = getpass("master password: ")
+        m2 = None
+        while True:
+            m1 = getpass("master password: ")
+            if not args.confirm:
+                break
+            m2 = getpass("master password (confirm): ")
+            if m1 == m2:
+                break
+        m = m1
 
     password = gen_password(d=d, u=u, m=m, c=args.counter, f=args.format)
 

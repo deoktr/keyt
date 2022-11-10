@@ -28,12 +28,14 @@ positional arguments:
   username              Username/Email/ID.
   master_password       Master password used during the password generation.
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  --version
+  -V, --version
+  --confirm             Ask to confirm master password, usefull when
+                        generating a new password.
   -c COUNTER, --counter COUNTER
-                        An integer that can be incremented to get a new password
-                        for the same account. default=0.
+                        An integer that can be incremented to get a new
+                        password for the same account. default=0.
   -f FORMAT, --format FORMAT
                         Password format can be: 'max', 'high', 'mid', 'pin' or
                         'pin6'. default=max.
@@ -82,6 +84,10 @@ sudo apt-get install xclip
 ```
 
 More infos on pyperclip description: [pypi pyperclip](https://pypi.org/project/pyperclip/).
+
+## TODO
+
+- Add a format to generate pass phrases
 
 ## License
 
