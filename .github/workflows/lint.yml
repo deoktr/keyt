@@ -22,8 +22,11 @@ jobs:
         pip install isort
         pip install flake8
     - name: Analysing the code with black
-      run: black --check cli
+      run: black --check keyt
+      working-directory: cli
     - name: Order import with isort
-      run: isort cli
+      run: isort keyt
+      working-directory: cli
     - name: Lint with flake8
-      run: flake8 cli
+      run: flake8 keyt
+      working-directory: cli
