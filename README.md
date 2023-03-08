@@ -8,7 +8,7 @@ keyt is a stateless password manager and generator.
 
 The intent of this program is to have a password manager and generator without storing any data anywhere in any form. The password is derived from a master password.
 
-⚠️ Every passwords are derived from your master password, if you loose it you will lose access to all your account, be carreful.
+⚠️ Every passwords are derived from your master password, if you loose it you will lose access to all your account, be careful.
 
 ## Install CLI
 
@@ -16,7 +16,7 @@ The intent of this program is to have a password manager and generator without s
 pip install keyt
 ```
 
-or from source
+Or from source
 
 ```shell
 git clone https://github.com/2O4/keyt
@@ -102,7 +102,7 @@ The password is generated from 5 inputs.
 * `counter` (c) (*default*=0): an integer that can be incremented to get a new password for the same account.
 * `format` (f) (*default*=max): the password's format, can be: `max`, `high`, `mid`, `pin`, `pin6`.
 
-For more informations on the format go the the `Password formats` section.
+For more information on the format go the the `Password formats` section.
 
 The counter input is used to get a new password for the same account, this can be usefull to change the password without having to change your master password.
 
@@ -132,7 +132,7 @@ The counter input is used to get a new password for the same account, this can b
 
 Base85 is used has encoding because it adds special characters. The RFC 1924 is a revised version of Ascii85 but this version excludes the characters `"',./:[\] `.
 
-Base58 is used has encoding because it only contains non ambiguous characters when printed, excluded characters: `0IOl`. It was originaly created by Satoshi Nakamoto to encode bitcoin addresses in an easly readable way.
+Base58 is used has encoding because it only contains non ambiguous characters when printed, excluded characters: `0IOl`. It was originally created by Satoshi Nakamoto to encode bitcoin addresses in an easily readable way.
 
 ## License
 

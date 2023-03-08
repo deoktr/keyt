@@ -8,7 +8,7 @@ keyt is a stateless password manager and generator.
 
 The intent of this program is to have a password manager and generator without storing any data anywhere in any form. The password is derived from a master password.
 
-⚠️ Every passwords are derived from your master password, if you loose it you will lose access to all your account, be carreful.
+⚠️ Every passwords are derived from your master password, if you loose it you will lose access to all your account, be careful.
 
 ## Install CLI
 
@@ -16,7 +16,7 @@ The intent of this program is to have a password manager and generator without s
 pip install keyt
 ```
 
-or from source
+Or from source
 
 ```shell
 git clone https://github.com/2O4/keyt
@@ -83,7 +83,7 @@ $ keyt example.com admin admin -o -f pin
 
 ## Troubleshooting
 
-If you get an error on pyperclip it's probably because you need to install additionnal packages.
+If you get an error on pyperclip it's probably because you need to install additional packages.
 
 For example on Ubuntu:
 
@@ -91,7 +91,7 @@ For example on Ubuntu:
 sudo apt-get install xclip
 ```
 
-More infos on pyperclip description: [pypi pyperclip](https://pypi.org/project/pyperclip/).
+More info on pyperclip description: [pypi pyperclip](https://pypi.org/project/pyperclip/).
 
 ## TODO
 
