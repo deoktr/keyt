@@ -39,7 +39,7 @@ positional arguments:
 options:
   -h, --help            show this help message and exit
   -V, --version
-  --confirm             Ask to confirm master password, usefull when
+  --confirm             Ask to confirm master password, useful when
                         generating a new password.
   -c COUNTER, --counter COUNTER
                         An integer that can be incremented to get a new
@@ -75,6 +75,8 @@ $ keyt example.com admin admin -o -f pin
 3070
 ```
 
+Python API:
+
 ```python
 >>> from keyt import gen_password
 >>> gen_password(d="example.com", u="admin", m="admin")
@@ -92,10 +94,6 @@ sudo apt-get install xclip
 ```
 
 More info on pyperclip description: [pypi pyperclip](https://pypi.org/project/pyperclip/).
-
-## TODO
-
-- Add a format to generate pass phrases
 
 ## License
 

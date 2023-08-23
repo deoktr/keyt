@@ -46,7 +46,7 @@ except ImportError:
     PYPERCLIP_INSTALLED = False
 
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 
 class F(Enum):
@@ -64,7 +64,8 @@ def gen_password(d, u, m, c=0, f="max"):
     f = f.upper()
 
     if f not in list(F.__members__):
-        raise ValueError(f"Invalid format '{f}'.")
+        msg = f"Invalid format '{f}'."
+        raise ValueError(msg)
 
     f = F[f]
 
@@ -131,7 +132,7 @@ def parse_args(args=None):
     )
     parser.add_argument(
         "--confirm",
-        help="Ask to confirm master password, usefull when generating a new "
+        help="Ask to confirm master password, useful when generating a new "
         "password.",
         action="store_true",
     )
@@ -190,9 +191,8 @@ def dispatch(args):
         return
 
     if not PYPERCLIP_INSTALLED:
-        raise Exception(
-            "`pyperclip` is needed.\nYou can also use the `-o` flag."
-        )
+        msg = "`pyperclip` is needed.\nYou can also use the `-o` flag."
+        raise Exception(msg)
 
     pyperclip.copy(password)
     timer = args.timer

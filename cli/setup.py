@@ -10,7 +10,7 @@ requirements = ["pyperclip", "base58"]
 
 setup(
     name="keyt",
-    version="1.1.0",
+    version="1.1.1",
     author="keyt",
     author_email="",
     description="Stateless password manager and generator.",
