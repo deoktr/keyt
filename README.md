@@ -18,8 +18,8 @@ pip install keyt
 
 Or from source
 
-```shell
-git clone https://github.com/2O4/keyt
+```bash
+git clone https://github.com/deoktr/keyt
 cd keyt/cli
 pip install .
 ```
