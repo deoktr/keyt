@@ -12,7 +12,7 @@ The intent of this program is to have a password manager and generator without s
 
 ## Install CLI
 
-```shell
+```bash
 pip install keyt
 ```
 
@@ -57,7 +57,7 @@ options:
 
 ## Examples
 
-```text
+```txt
 $ keyt
 domain: example.com
 username: admin

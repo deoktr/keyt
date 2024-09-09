@@ -12,13 +12,13 @@ The intent of this program is to have a password manager and generator without s
 
 ## Install CLI
 
-```shell
+```bash
 pip install keyt
 ```
 
 Or from source
 
-```shell
+```bash
 git clone https://github.com/2O4/keyt
 cd keyt/cli
 pip install .
@@ -55,7 +55,7 @@ options:
 
 ## Examples
 
-```text
+```txt
 $ keyt
 domain: example.com
 username: admin
@@ -97,4 +97,4 @@ More info on pyperclip description: [pypi pyperclip](https://pypi.org/project/py
 
 ## License
 
-keyt is licensed under MIT.
+keyt is licensed under [MIT](./../LICENSE).

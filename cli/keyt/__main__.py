@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2021 2O4
+# Copyright (c) 2021 deoktr
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 # SOFTWARE.
 #
 """Keyt CLI."""
+
 from keyt.cli import cli
 
 if __name__ == "__main__":

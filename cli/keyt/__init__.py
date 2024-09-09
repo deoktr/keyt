@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2021 2O4
+# Copyright (c) 2021 deoktr
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 # SOFTWARE.
 #
 """Keyt, a stateless password manager and generator."""
+
 from keyt.cli import F, __version__, gen_password
 
 __all__ = ["F", "gen_password", "__version__"]

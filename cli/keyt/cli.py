@@ -2,7 +2,7 @@
 #
 # MIT License
 #
-# Copyright (c) 2021 2O4
+# Copyright (c) 2021 deoktr
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
 # SOFTWARE.
 #
 """Keyt CLI, a stateless password manager and generator."""
+
 import argparse
 import sys
 import time
@@ -46,7 +47,7 @@ except ImportError:
     PYPERCLIP_INSTALLED = False
 
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 
 
 class F(Enum):
