@@ -23,4 +23,3 @@ jobs:
           pip install base58
       - name: Test Python code and coverage
         run: pytest --cov=keyt
-        working-directory: cli

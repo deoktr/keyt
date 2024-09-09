@@ -20,7 +20,7 @@ Or from source
 
 ```bash
 git clone https://github.com/deoktr/keyt
-cd keyt/cli
+cd keyt
 pip install .
 ```
 
